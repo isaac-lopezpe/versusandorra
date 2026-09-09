@@ -1,114 +1,649 @@
-# Manual de WordPress — Versus Andorra
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de WordPress — Versus Andorra</title>
+<style>
+  :root{
+    --navy:#0f2942;
+    --navy-dark:#0a1c2e;
+    --gold:#c9a227;
+    --gold-light:#f5ecd2;
+    --bg:#f7f5f0;
+    --card:#ffffff;
+    --ink:#1c2530;
+    --muted:#5b6672;
+    --line:#e4e1d8;
+    --green:#1f8a4c;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  a{color:var(--navy);}
+  header.hero{
+    background:linear-gradient(135deg,var(--navy-dark),var(--navy) 60%,#173a5e);
+    color:#fff;
+    padding:56px 24px 64px;
+    text-align:center;
+    position:relative;
+  }
+  header.hero::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:-1px;
+    height:36px;
+    background:var(--bg);
+    border-radius:50% 50% 0 0 / 100% 100% 0 0;
+  }
+  header.hero .eyebrow{
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:var(--gold);
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  header.hero h1{
+    font-size:clamp(28px,4vw,42px);
+    margin:0 0 12px;
+    font-weight:800;
+  }
+  header.hero p{
+    max-width:620px;
+    margin:0 auto;
+    color:#d7dfe8;
+    font-size:16px;
+  }
+  .updated-pill{
+    display:inline-block;
+    margin-top:20px;
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.25);
+    padding:6px 16px;
+    border-radius:999px;
+    font-size:13px;
+    color:#f0ead6;
+  }
 
-Manual operativo para el equipo de **Versus Andorra**: acceso al panel de administración de la web y guía paso a paso, con video, para las tareas más frecuentes (propiedades, fotos, traducciones y cambios generales).
+  .layout{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 24px 80px;
+    display:grid;
+    grid-template-columns:250px 1fr;
+    gap:36px;
+  }
+  @media (max-width:880px){
+    .layout{grid-template-columns:1fr;}
+  }
 
-> Última actualización: septiembre 2026 · Mantenido por Isaac Lopez (desarrollo web)
+  nav.toc{
+    position:sticky;
+    top:20px;
+    align-self:start;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px;
+    box-shadow:0 2px 10px rgba(15,41,66,.05);
+  }
+  nav.toc h2{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--muted);
+    margin:0 0 12px;
+  }
+  nav.toc ol{
+    list-style:none;
+    margin:0; padding:0;
+    counter-reset:toc;
+  }
+  nav.toc li{
+    counter-increment:toc;
+    margin-bottom:4px;
+  }
+  nav.toc a{
+    display:flex;
+    gap:10px;
+    text-decoration:none;
+    color:var(--ink);
+    font-size:14px;
+    padding:7px 8px;
+    border-radius:8px;
+    transition:background .15s;
+  }
+  nav.toc a:hover{background:var(--gold-light);}
+  nav.toc a::before{
+    content:counter(toc);
+    background:var(--navy);
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    width:20px;height:20px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    flex:none;
+  }
 
----
+  main{min-width:0;}
 
-## Índice
+  section.card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px 30px;
+    margin-bottom:24px;
+    box-shadow:0 2px 10px rgba(15,41,66,.04);
+    scroll-margin-top:20px;
+  }
+  section.card h2{
+    margin:0 0 6px;
+    font-size:21px;
+    color:var(--navy);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  section.card .badge-num{
+    background:var(--gold);
+    color:#3a2c05;
+    font-weight:800;
+    font-size:13px;
+    width:28px;height:28px;
+    border-radius:8px;
+    display:flex;align-items:center;justify-content:center;
+    flex:none;
+  }
+  section.card .lead{
+    color:var(--muted);
+    font-size:14.5px;
+    margin:0 0 18px;
+  }
+  h3.sub{
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--navy);
+    margin:22px 0 10px;
+  }
 
-1. [Acceso al panel de WordPress](#1-acceso-al-panel-de-wordpress)
-2. [Cómo agregar propiedades nuevas](#2-cómo-agregar-propiedades-nuevas)
-3. [Cómo actualizar propiedades ya publicadas](#3-cómo-actualizar-propiedades-ya-publicadas)
-4. [Cómo agregar marca de agua a las fotos](#4-cómo-agregar-marca-de-agua-a-las-fotos)
-5. [Cómo hacer otros cambios en WordPress](#5-cómo-hacer-otros-cambios-en-wordpress)
-6. [Cómo editar la página "Versus Explica"](#6-cómo-editar-la-página-versus-explica)
-7. [Cómo corregir traducciones en la web](#7-cómo-corregir-traducciones-en-la-web)
-8. [Seguridad y buenas prácticas](#8-seguridad-y-buenas-prácticas)
-9. [Soporte](#9-soporte)
+  .video-wrap{
+    position:relative;
+    padding-bottom:56.25%;
+    height:0;
+    border-radius:10px;
+    overflow:hidden;
+    background:#0a1c2e;
+    margin-bottom:10px;
+    border:1px solid var(--line);
+  }
+  .video-wrap iframe{
+    position:absolute; top:0; left:0; width:100%; height:100%; border:0;
+  }
+  .video-fallback{font-size:13px;color:var(--muted);margin:0 0 4px;}
+  .video-fallback a{font-weight:600;}
 
----
+  ol.steps{
+    margin:0;
+    padding-left:0;
+    list-style:none;
+    counter-reset:step;
+  }
+  ol.steps li{
+    counter-increment:step;
+    position:relative;
+    padding:8px 0 8px 38px;
+    border-bottom:1px dashed var(--line);
+    font-size:15px;
+  }
+  ol.steps li:last-child{border-bottom:none;}
+  ol.steps li::before{
+    content:counter(step);
+    position:absolute;
+    left:0; top:8px;
+    background:var(--navy);
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
+    width:24px;height:24px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  ol.steps li code{background:var(--gold-light);padding:1px 6px;border-radius:5px;}
 
-## 1. Acceso al panel de WordPress
+  .creds{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:14px;
+    margin:14px 0;
+  }
+  .cred-card{
+    background:var(--navy-dark);
+    color:#fff;
+    border-radius:10px;
+    padding:16px 18px;
+  }
+  .cred-card .field-label{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:#9fb4c9;
+    margin-bottom:4px;
+  }
+  .cred-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:12px;
+  }
+  .cred-row:last-child{margin-bottom:0;}
+  .cred-value{
+    font-family:"SFMono-Regular",Consolas,Menlo,monospace;
+    font-size:14.5px;
+    word-break:break-all;
+  }
+  button.copy-btn{
+    background:var(--gold);
+    border:none;
+    color:#3a2c05;
+    font-weight:700;
+    font-size:12px;
+    padding:6px 10px;
+    border-radius:6px;
+    cursor:pointer;
+    flex:none;
+    transition:transform .1s;
+  }
+  button.copy-btn:hover{filter:brightness(1.05);}
+  button.copy-btn:active{transform:scale(.95);}
 
-| Campo | Valor |
-|---|---|
-| URL del panel | [versusandorra.com/wp-admin](https://versusandorra.com/wp-admin) |
-| Usuario | `versusandorra01@gmail.com` |
-| Contraseña | `L4FbZa81xM80MQD6` |
+  .note{
+    background:var(--gold-light);
+    border-left:4px solid var(--gold);
+    padding:14px 18px;
+    border-radius:8px;
+    font-size:14.5px;
+    margin:16px 0;
+  }
+  .note.security{
+    background:#fdecec;
+    border-left-color:#c0392b;
+  }
+  .note strong{color:var(--navy);}
 
-### Correo electrónico asociado (Gmail)
+  table.info-table{
+    width:100%;
+    border-collapse:collapse;
+    margin:14px 0;
+    font-size:14.5px;
+  }
+  table.info-table th, table.info-table td{
+    text-align:left;
+    padding:9px 12px;
+    border-bottom:1px solid var(--line);
+  }
+  table.info-table th{
+    color:var(--muted);
+    font-weight:600;
+    width:38%;
+  }
 
-Esta cuenta de Gmail está asociada al acceso de WordPress: recibe las notificaciones del sitio (formularios, alertas del panel, recuperación de contraseña) y conviene revisarla junto con el panel.
+  ul.checklist{list-style:none;margin:0;padding:0;}
+  ul.checklist li{
+    padding:6px 0 6px 26px;
+    position:relative;
+    font-size:14.5px;
+  }
+  ul.checklist li::before{
+    content:"✓";
+    position:absolute;left:0;top:5px;
+    color:var(--green);
+    font-weight:800;
+  }
 
-| Campo | Valor |
-|---|---|
-| Correo | `versusandorra01@gmail.com` |
-| Clave | `Look!2026_p@2026` |
+  footer{
+    text-align:center;
+    padding:30px 24px 50px;
+    color:var(--muted);
+    font-size:13px;
+  }
 
----
+  .btn-link{
+    display:inline-block;
+    margin-top:6px;
+    background:var(--navy);
+    color:#fff;
+    text-decoration:none;
+    padding:9px 16px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+  }
+  .btn-link:hover{background:var(--navy-dark);}
 
-## 2. Cómo agregar propiedades nuevas
+  .grid-2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  @media (max-width:700px){ .grid-2{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
 
-**Video:** [Ver tutorial en Loom](https://www.loom.com/share/34d8be5f0aad4ee3a1e182a792460f9d)
+<header class="hero">
+  <div class="eyebrow">Uso interno · Equipo Versus Andorra</div>
+  <h1>Manual de WordPress</h1>
+  <p>Guía de referencia para gestionar la web de Versus Andorra: acceso al panel, propiedades, fotos, traducciones y mantenimiento básico.</p>
+  <span class="updated-pill">Última actualización: septiembre 2026 · Mantenido por Isaac López</span>
+</header>
 
-El video cubre el proceso completo para publicar una ficha de propiedad nueva, de principio a fin. Conviene verlo entero antes de publicar la primera ficha y usarlo como referencia las siguientes veces.
+<div class="layout">
 
----
+  <nav class="toc">
+    <h2>Contenido</h2>
+    <ol>
+      <li><a href="#acceso">Acceso al panel</a></li>
+      <li><a href="#formularios">Formularios de contacto</a></li>
+      <li><a href="#propiedades-nuevas">Agregar propiedades</a></li>
+      <li><a href="#propiedades-actualizar">Actualizar propiedades</a></li>
+      <li><a href="#marca-agua">Marca de agua en fotos</a></li>
+      <li><a href="#otros-cambios">Otros cambios</a></li>
+      <li><a href="#versus-explica">Página "Versus Explica"</a></li>
+      <li><a href="#traducciones">Corregir traducciones</a></li>
+      <li><a href="#cache">Limpiar caché</a></li>
+      <li><a href="#seguridad">Seguridad</a></li>
+      <li><a href="#soporte">Soporte</a></li>
+    </ol>
+  </nav>
 
-## 3. Cómo actualizar propiedades ya publicadas
+  <main>
 
-**Video:** [Ver tutorial en Loom](https://www.loom.com/share/a3b0bfd68b554181ba6b9d62469450a4)
+    <section class="card" id="acceso">
+      <h2><span class="badge-num">1</span> Acceso al panel de WordPress</h2>
+      <p class="lead">Panel de administración del sitio y correo asociado a la cuenta.</p>
 
-Para localizar la ficha correcta antes de editarla, usar el listado de IDs de propiedades:
+      <div class="creds">
+        <div class="cred-card">
+          <div class="field-label">Panel de WordPress</div>
+          <div class="cred-row">
+            <span class="cred-value">versusandorra.com/wp-admin</span>
+            <button class="copy-btn" data-copy="https://versusandorra.com/wp-admin">Copiar</button>
+          </div>
+          <div class="field-label">Usuario</div>
+          <div class="cred-row">
+            <span class="cred-value">versusandorra01@gmail.com</span>
+            <button class="copy-btn" data-copy="versusandorra01@gmail.com">Copiar</button>
+          </div>
+          <div class="field-label">Contraseña</div>
+          <div class="cred-row">
+            <span class="cred-value">L4FbZa81xM80MQD6</span>
+            <button class="copy-btn" data-copy="L4FbZa81xM80MQD6">Copiar</button>
+          </div>
+        </div>
 
-**[IDs de propiedades (Google Docs)](https://docs.google.com/document/d/19FNeWeV6YdLULyUvcIMrjvsM6o7FBu3qApyPKtGp8a8/edit?tab=t.2ibd35ybyigs)**
+        <div class="cred-card">
+          <div class="field-label">Correo asociado (Gmail)</div>
+          <div class="cred-row">
+            <span class="cred-value">versusandorra01@gmail.com</span>
+            <button class="copy-btn" data-copy="versusandorra01@gmail.com">Copiar</button>
+          </div>
+          <div class="field-label">Clave</div>
+          <div class="cred-row">
+            <span class="cred-value">Look!2026_p@2026</span>
+            <button class="copy-btn" data-copy="Look!2026_p@2026">Copiar</button>
+          </div>
+        </div>
+      </div>
 
-Este documento identifica cada propiedad por su ID interno, lo que evita confundir fichas con datos parecidos (misma zona o tipología) al momento de actualizar precio, disponibilidad o fotos.
+      <div class="note">
+        <strong>Para qué sirve el correo asociado:</strong> esta bandeja de Gmail recibe las notificaciones de WordPress (alertas del panel, recuperación de acceso) y, como se explica en la siguiente sección, también las copias de los formularios de contacto del sitio. Conviene revisarla con frecuencia.
+      </div>
+    </section>
 
----
+    <section class="card" id="formularios">
+      <h2><span class="badge-num">2</span> Formularios de contacto</h2>
+      <p class="lead">Cómo llegan las consultas que dejan los visitantes del sitio.</p>
+      <ul class="checklist">
+        <li>Los formularios de inicio, ficha de propiedad, venta y contacto quedan registrados en el sistema central de captación de clientes (CRM), con clasificación automática y seguimiento.</li>
+        <li>Además, cada envío llega también como correo directo a <strong>versusandorra@gmail.com</strong>, como copia adicional.</li>
+        <li>Conviene revisar ambos canales: el CRM para el seguimiento organizado, y esa bandeja de correo como respaldo inmediato.</li>
+      </ul>
+    </section>
 
-## 4. Cómo agregar marca de agua a las fotos
+    <section class="card" id="propiedades-nuevas">
+      <h2><span class="badge-num">3</span> Cómo agregar propiedades nuevas</h2>
+      <p class="lead">Publicar una ficha de propiedad desde cero.</p>
 
-**Video:** [Ver tutorial en Loom](https://www.loom.com/share/13502b389061472eb45f0c5f7f6c19f1)
+      <div class="video-wrap">
+        <iframe src="https://www.loom.com/embed/34d8be5f0aad4ee3a1e182a792460f9d" allowfullscreen></iframe>
+      </div>
+      <p class="video-fallback">¿No carga el video? <a href="https://www.loom.com/share/34d8be5f0aad4ee3a1e182a792460f9d" target="_blank" rel="noopener">Verlo directamente en Loom</a>.</p>
 
-El marcado de agua se aplica con el programa **Visual Watermark**, instalado en el equipo (no es una función de WordPress).
+      <h3 class="sub">Pasos generales</h3>
+      <ol class="steps">
+        <li>Entrar al panel de WordPress e ir al menú de propiedades del sitio.</li>
+        <li>Elegir la opción para añadir una ficha nueva.</li>
+        <li>Completar los datos base: título, tipo de propiedad, precio, parroquia/zona y estado (venta o alquiler).</li>
+        <li>Cargar las fotos ya procesadas con marca de agua (ver sección 5).</li>
+        <li>Completar las características (habitaciones, baños, superficie, extras).</li>
+        <li>Revisar la vista previa antes de publicar.</li>
+        <li>Publicar y confirmar que la ficha aparece correctamente en el listado del sitio.</li>
+      </ol>
+      <div class="note">Los nombres exactos de los campos pueden variar según la actualización del panel. Para el detalle preciso de cada campo, seguir el orden que muestra el video.</div>
+    </section>
 
-| Campo | Valor |
-|---|---|
-| Descargar Visual Watermark | [visualwatermark.com/es/download](https://www.visualwatermark.com/es/download/) |
-| Usuario | `versusandorra@gmail.com` |
-| Clave de activación | `160156644` |
-| Plan | Permanente, adquirido el 16 de agosto de 2026. No requiere renovación. Incluye hasta 10 usuarios (10 PCs). |
+    <section class="card" id="propiedades-actualizar">
+      <h2><span class="badge-num">4</span> Cómo actualizar propiedades ya publicadas</h2>
+      <p class="lead">Editar precio, disponibilidad, fotos o descripción de una ficha existente.</p>
 
-Conviene aplicar la marca de agua a las fotos **antes** de subirlas a la ficha de la propiedad en WordPress, siguiendo el orden que muestra el video.
+      <div class="video-wrap">
+        <iframe src="https://www.loom.com/embed/a3b0bfd68b554181ba6b9d62469450a4" allowfullscreen></iframe>
+      </div>
+      <p class="video-fallback">¿No carga el video? <a href="https://www.loom.com/share/a3b0bfd68b554181ba6b9d62469450a4" target="_blank" rel="noopener">Verlo directamente en Loom</a>.</p>
 
----
+      <h3 class="sub">Pasos generales</h3>
+      <ol class="steps">
+        <li>Ubicar el <strong>ID</strong> de la propiedad en el documento de IDs (enlace abajo).</li>
+        <li>Buscar esa ficha en el listado de propiedades del panel, por título o ID.</li>
+        <li>Abrirla en modo edición.</li>
+        <li>Actualizar el campo necesario: precio, disponibilidad, fotos o descripción.</li>
+        <li>Guardar los cambios y revisarlos en la web pública.</li>
+      </ol>
 
-## 5. Cómo hacer otros cambios en WordPress
+      <div class="note">
+        <strong>IDs de propiedades:</strong> este documento identifica cada propiedad por su ID interno, para no confundir fichas con datos parecidos (misma zona o tipología).<br>
+        <a class="btn-link" href="https://docs.google.com/document/d/19FNeWeV6YdLULyUvcIMrjvsM6o7FBu3qApyPKtGp8a8/edit?tab=t.2ibd35ybyigs" target="_blank" rel="noopener">Abrir listado de IDs (Google Docs)</a>
+      </div>
+    </section>
 
-**Video:** [Ver tutorial en Loom](https://www.loom.com/share/09f9636e985441da97999bf3c0abb4e6)
+    <section class="card" id="marca-agua">
+      <h2><span class="badge-num">5</span> Cómo agregar marca de agua a las fotos</h2>
+      <p class="lead">Antes de subir fotos a una ficha, se procesan con el programa Visual Watermark.</p>
 
-Cubre cambios generales del sitio que no son ni propiedades ni traducciones: textos de páginas fijas, imágenes, secciones y bloques del editor visual.
+      <div class="video-wrap">
+        <iframe src="https://www.loom.com/embed/13502b389061472eb45f0c5f7f6c19f1" allowfullscreen></iframe>
+      </div>
+      <p class="video-fallback">¿No carga el video? <a href="https://www.loom.com/share/13502b389061472eb45f0c5f7f6c19f1" target="_blank" rel="noopener">Verlo directamente en Loom</a>.</p>
 
----
+      <h3 class="sub">Datos del programa</h3>
+      <table class="info-table">
+        <tr><th>Descargar</th><td><a href="https://www.visualwatermark.com/es/download/" target="_blank" rel="noopener">visualwatermark.com/es/download</a></td></tr>
+        <tr><th>Usuario</th><td class="cred-inline">versusandorra@gmail.com</td></tr>
+        <tr><th>Clave de activación</th><td class="cred-inline">160156644</td></tr>
+        <tr><th>Plan</th><td>Permanente, adquirido el 16 de agosto de 2026. No requiere renovación. Incluye hasta 10 usuarios (10 PCs).</td></tr>
+      </table>
 
-## 6. Cómo editar la página "Versus Explica"
+      <h3 class="sub">Orden recomendado</h3>
+      <ol class="steps">
+        <li>Seleccionar las fotos originales de la propiedad en Visual Watermark.</li>
+        <li>Aplicar la marca de agua desde el programa (ver ajustes exactos en el video).</li>
+        <li>Exportar las fotos ya marcadas a una carpeta de salida.</li>
+        <li>Subir esas fotos exportadas a la ficha de la propiedad en WordPress.</li>
+      </ol>
+    </section>
 
-**Video:** [Ver tutorial en Loom](https://www.loom.com/share/1fca118554f640d89f603af21bf42053)
+    <section class="card" id="otros-cambios">
+      <h2><span class="badge-num">6</span> Cómo hacer otros cambios en WordPress</h2>
+      <p class="lead">Cambios generales de texto, imágenes o secciones que no son ni propiedades ni traducciones.</p>
 
-Guía específica para actualizar el contenido de la página "Versus Explica" sin afectar el resto del sitio.
+      <div class="video-wrap">
+        <iframe src="https://www.loom.com/embed/09f9636e985441da97999bf3c0abb4e6" allowfullscreen></iframe>
+      </div>
+      <p class="video-fallback">¿No carga el video? <a href="https://www.loom.com/share/09f9636e985441da97999bf3c0abb4e6" target="_blank" rel="noopener">Verlo directamente en Loom</a>.</p>
 
----
+      <h3 class="sub">Pasos generales (editor Elementor)</h3>
+      <ol class="steps">
+        <li>Ir a <code>Páginas</code> en el panel y localizar la página a modificar.</li>
+        <li>Hacer clic en <code>Editar con Elementor</code>.</li>
+        <li>Seleccionar el bloque o texto a cambiar en la vista previa.</li>
+        <li>Aplicar el cambio desde el panel de la izquierda.</li>
+        <li>Hacer clic en <code>Actualizar</code>, abajo a la izquierda.</li>
+        <li>Revisar el resultado en la web pública. Si el cambio no se ve reflejado, limpiar caché (ver sección 9).</li>
+      </ol>
+    </section>
 
-## 7. Cómo corregir traducciones en la web
+    <section class="card" id="versus-explica">
+      <h2><span class="badge-num">7</span> Cómo editar la página "Versus Explica"</h2>
+      <p class="lead">Actualizar el contenido de esta página sin afectar el resto del sitio.</p>
 
-**Video:** [Ver tutorial en Loom](https://www.loom.com/share/0498a3ecb6d148b98efb894c2df80feb)
+      <div class="video-wrap">
+        <iframe src="https://www.loom.com/embed/1fca118554f640d89f603af21bf42053" allowfullscreen></iframe>
+      </div>
+      <p class="video-fallback">¿No carga el video? <a href="https://www.loom.com/share/1fca118554f640d89f603af21bf42053" target="_blank" rel="noopener">Verlo directamente en Loom</a>.</p>
 
-La web usa el plugin **TranslatePress** para gestionar los idiomas (español, catalán, francés e inglés). El video muestra cómo entrar al editor visual de traducción y corregir o ajustar un texto directamente sobre la página, en cualquier idioma.
+      <h3 class="sub">Pasos generales</h3>
+      <ol class="steps">
+        <li>Ir a <code>Páginas</code> y buscar "Versus Explica".</li>
+        <li>Editar con Elementor.</li>
+        <li>Ajustar el bloque correspondiente.</li>
+        <li>Actualizar y revisar en la web pública. Limpiar caché si es necesario (ver sección 9).</li>
+      </ol>
+    </section>
 
-**Sobre la traducción automática:** el plan de TranslatePress incluye un límite mensual de palabras traducidas automáticamente por Google. Si ese límite se agota, el sitio deja de traducir contenido nuevo de forma automática hasta el mes siguiente (las páginas ya traducidas no se ven afectadas). Mientras tanto, cualquier texto puede corregirse o completarse a mano con el editor del video. Para evitar depender de esto, hay dos alternativas cuando el volumen de contenido nuevo lo justifique: subir de plan en TranslatePress, o recargar un mínimo de 40 USD en créditos de Google Cloud (la plataforma que factura ese servicio de traducción).
+    <section class="card" id="traducciones">
+      <h2><span class="badge-num">8</span> Cómo corregir traducciones en la web</h2>
+      <p class="lead">La web usa el plugin TranslatePress para gestionar español, catalán, francés e inglés.</p>
 
----
+      <div class="video-wrap">
+        <iframe src="https://www.loom.com/embed/0498a3ecb6d148b98efb894c2df80feb" allowfullscreen></iframe>
+      </div>
+      <p class="video-fallback">¿No carga el video? <a href="https://www.loom.com/share/0498a3ecb6d148b98efb894c2df80feb" target="_blank" rel="noopener">Verlo directamente en Loom</a>.</p>
 
-## 8. Seguridad y buenas prácticas
+      <h3 class="sub">Pasos generales</h3>
+      <ol class="steps">
+        <li>Abrir la página, en el idioma correspondiente, en el sitio publicado.</li>
+        <li>Hacer clic en <code>Translate Page</code>, en la barra superior de WordPress (visible solo estando conectado).</li>
+        <li>Seleccionar el texto a corregir directamente sobre la vista previa.</li>
+        <li>Escribir la corrección en el panel de TranslatePress que se abre a la izquierda.</li>
+        <li>Guardar el cambio.</li>
+      </ol>
 
-- Compartir este manual solo con las personas del equipo que necesitan acceso al panel.
-- Cambiar la contraseña de WordPress periódicamente, y de inmediato ante cualquier sospecha de acceso no autorizado.
-- Activar la verificación en dos pasos en el panel de WordPress y en la cuenta de Gmail asociada, si está disponible.
-- No reenviar las credenciales de esta página por canales sin cifrar (mensajes de texto abiertos, publicaciones).
+      <div class="note">
+        <strong>Sobre la traducción automática:</strong> el plan de TranslatePress incluye un límite mensual de palabras traducidas automáticamente por Google. Si ese límite se agota, el sitio deja de traducir contenido <em>nuevo</em> de forma automática hasta el mes siguiente (las páginas ya traducidas no se ven afectadas). Mientras tanto, cualquier texto puede corregirse o completarse a mano con los pasos de arriba. Para no depender de esto, cuando el volumen de contenido nuevo lo justifique, hay dos alternativas: subir de plan en TranslatePress, o recargar un mínimo de 40 USD en créditos de Google Cloud (la plataforma que factura ese servicio de traducción).
+      </div>
+    </section>
 
-## 9. Soporte
+    <section class="card" id="cache">
+      <h2><span class="badge-num">9</span> Limpiar caché del sitio</h2>
+      <p class="lead">Cuando un cambio no se ve reflejado en la web pública, casi siempre es un tema de caché. Purgar en este orden.</p>
 
-Para dudas técnicas que no cubran los videos de este manual, contactar al equipo de desarrollo web (Isaac Lopez).
+      <h3 class="sub">Caché de Elementor</h3>
+      <ol class="steps">
+        <li>En el panel, ir a <code>Elementor → Herramientas</code>.</li>
+        <li>Abrir la pestaña <code>General</code>.</li>
+        <li>Hacer clic en <code>Regenerar CSS y Datos</code>.</li>
+      </ol>
+      <p class="video-fallback">Atajo rápido: en la barra superior de administración (visible en cualquier página estando conectado), pasar el cursor sobre <code>Elementor</code> y hacer clic en <code>Limpiar caché de Elementor</code>.</p>
+
+      <h3 class="sub">Caché del plugin LiteSpeed Cache</h3>
+      <ol class="steps">
+        <li>Ruta rápida: en la barra superior de administración, hacer clic en <code>LiteSpeed Cache</code> → <code>Purge All</code>.</li>
+        <li>Ruta completa: en el panel, ir a <code>LiteSpeed Cache → Toolbox</code>.</li>
+        <li>Abrir la pestaña <code>Purge</code>.</li>
+        <li>Hacer clic en <code>Purge All</code>.</li>
+      </ol>
+      <div class="note">Si el hosting de Versus Andorra usa servidores LiteSpeed —lo más probable, dado que este plugin está instalado—, purgar aquí también limpia el caché a nivel de servidor.</div>
+
+      <h3 class="sub">Caché a nivel de hosting</h3>
+      <p style="font-size:14.5px;">Depende del panel del proveedor contratado. Las rutas más comunes:</p>
+      <table class="info-table">
+        <tr><th>hPanel (Hostinger)</th><td>Sitios web → Administrar → Rendimiento / Caché → <code>Purgar caché</code>.</td></tr>
+        <tr><th>SiteGround (Site Tools)</th><td>Velocidad → Caché → botón <code>Vaciar caché</code>.</td></tr>
+        <tr><th>cPanel con LiteSpeed</th><td>Sección <code>LiteSpeed Web Cache Manager</code> → <code>Vaciar todo el caché</code>.</td></tr>
+        <tr><th>Cloudways</th><td>Panel del servidor → pestaña <code>Varnish / Application Management</code> → <code>Purge Cache</code>.</td></tr>
+      </table>
+      <div class="note">Si no se reconoce el panel exacto del hosting contratado, contactar al proveedor o al soporte técnico indicando: "necesito purgar el caché del sitio a nivel de servidor".</div>
+
+      <h3 class="sub">Verificación final: caché del navegador</h3>
+      <p style="font-size:14.5px;">Después de purgar los pasos anteriores, forzar una recarga completa del navegador:</p>
+      <table class="info-table">
+        <tr><th>Windows</th><td><code>Ctrl + Shift + R</code></td></tr>
+        <tr><th>Mac</th><td><code>Cmd + Shift + R</code></td></tr>
+        <tr><th>Alternativa</th><td>Abrir la página en una ventana de incógnito.</td></tr>
+      </table>
+    </section>
+
+    <section class="card" id="seguridad">
+      <h2><span class="badge-num">10</span> Seguridad y buenas prácticas</h2>
+      <div class="note security">
+        <ul class="checklist">
+          <li>Compartir este manual solo con las personas del equipo que necesitan acceso al panel.</li>
+          <li>Cambiar la contraseña de WordPress periódicamente, y de inmediato ante cualquier sospecha de acceso no autorizado.</li>
+          <li>Activar la verificación en dos pasos en el panel de WordPress y en la cuenta de Gmail asociada, si está disponible.</li>
+          <li>No reenviar las credenciales de esta página por canales sin cifrar (mensajes de texto abiertos, publicaciones).</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card" id="soporte">
+      <h2><span class="badge-num">11</span> Soporte</h2>
+      <p style="font-size:14.5px;">Para dudas técnicas que no cubran los videos de este manual, contactar al equipo de desarrollo web (Isaac López).</p>
+    </section>
+
+  </main>
+</div>
+
+<footer>Manual interno de Versus Andorra · No compartir fuera del equipo autorizado</footer>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var text = btn.getAttribute('data-copy');
+      var done = function(){
+        var original = btn.textContent;
+        btn.textContent = 'Copiado';
+        setTimeout(function(){ btn.textContent = original; }, 1200);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(function(){ fallbackCopy(text, done); });
+      } else {
+        fallbackCopy(text, done);
+      }
+    });
+  });
+  function fallbackCopy(text, done){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch(e) {}
+    document.body.removeChild(ta);
+    done();
+  }
+</script>
+
+</body>
+</html>
