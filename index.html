@@ -176,18 +176,48 @@
     margin:22px 0 10px;
   }
 
-  .video-wrap{
-    position:relative;
-    padding-bottom:56.25%;
-    height:0;
+  .video-card{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    background:linear-gradient(120deg,var(--navy-dark),var(--navy));
     border-radius:10px;
-    overflow:hidden;
-    background:#0a1c2e;
-    margin-bottom:10px;
-    border:1px solid var(--line);
+    padding:18px 20px;
+    margin-bottom:14px;
+    text-decoration:none;
+    border:1px solid #0a1c2e;
+    transition:transform .12s, box-shadow .12s;
   }
-  .video-wrap iframe{
-    position:absolute; top:0; left:0; width:100%; height:100%; border:0;
+  .video-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(15,41,66,.25);
+  }
+  .video-card .play-badge{
+    flex:none;
+    width:52px;height:52px;
+    border-radius:50%;
+    background:var(--gold);
+    color:#3a2c05;
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;
+  }
+  .video-card .video-info{color:#fff;min-width:0;}
+  .video-card .video-info .eyebrow-sm{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--gold);
+    font-weight:700;
+    margin-bottom:4px;
+  }
+  .video-card .video-info .video-title{
+    font-size:16px;
+    font-weight:700;
+    margin-bottom:2px;
+  }
+  .video-card .video-info .video-sub{
+    font-size:13px;
+    color:#c7d3de;
   }
   .video-fallback{font-size:13px;color:var(--muted);margin:0 0 4px;}
   .video-fallback a{font-weight:600;}
@@ -425,10 +455,14 @@
       <h2><span class="badge-num">3</span> Cómo agregar propiedades nuevas</h2>
       <p class="lead">Publicar una ficha de propiedad desde cero.</p>
 
-      <div class="video-wrap">
-        <iframe src="https://www.loom.com/embed/34d8be5f0aad4ee3a1e182a792460f9d" allowfullscreen></iframe>
-      </div>
-      <p class="video-fallback">¿No carga el video? <a href="https://www.loom.com/share/34d8be5f0aad4ee3a1e182a792460f9d" target="_blank" rel="noopener">Verlo directamente en Loom</a>.</p>
+      <a class="video-card" href="https://www.loom.com/share/34d8be5f0aad4ee3a1e182a792460f9d" target="_blank" rel="noopener">
+        <span class="play-badge">▶</span>
+        <span class="video-info">
+          <span class="eyebrow-sm">Video · Loom</span>
+          <span class="video-title">Cómo agregar propiedades nuevas en WordPress</span>
+          <span class="video-sub">Clic para abrir y ver el tutorial completo</span>
+        </span>
+      </a>
 
       <h3 class="sub">Pasos generales</h3>
       <ol class="steps">
@@ -447,10 +481,14 @@
       <h2><span class="badge-num">4</span> Cómo actualizar propiedades ya publicadas</h2>
       <p class="lead">Editar precio, disponibilidad, fotos o descripción de una ficha existente.</p>
 
-      <div class="video-wrap">
-        <iframe src="https://www.loom.com/embed/a3b0bfd68b554181ba6b9d62469450a4" allowfullscreen></iframe>
-      </div>
-      <p class="video-fallback">¿No carga el video? <a href="https://www.loom.com/share/a3b0bfd68b554181ba6b9d62469450a4" target="_blank" rel="noopener">Verlo directamente en Loom</a>.</p>
+      <a class="video-card" href="https://www.loom.com/share/a3b0bfd68b554181ba6b9d62469450a4" target="_blank" rel="noopener">
+        <span class="play-badge">▶</span>
+        <span class="video-info">
+          <span class="eyebrow-sm">Video · Loom</span>
+          <span class="video-title">Cómo editar propiedades en WordPress</span>
+          <span class="video-sub">Clic para abrir y ver el tutorial completo</span>
+        </span>
+      </a>
 
       <h3 class="sub">Pasos generales</h3>
       <ol class="steps">
@@ -471,10 +509,14 @@
       <h2><span class="badge-num">5</span> Cómo agregar marca de agua a las fotos</h2>
       <p class="lead">Antes de subir fotos a una ficha, se procesan con el programa Visual Watermark.</p>
 
-      <div class="video-wrap">
-        <iframe src="https://www.loom.com/embed/13502b389061472eb45f0c5f7f6c19f1" allowfullscreen></iframe>
-      </div>
-      <p class="video-fallback">¿No carga el video? <a href="https://www.loom.com/share/13502b389061472eb45f0c5f7f6c19f1" target="_blank" rel="noopener">Verlo directamente en Loom</a>.</p>
+      <a class="video-card" href="https://www.loom.com/share/13502b389061472eb45f0c5f7f6c19f1" target="_blank" rel="noopener">
+        <span class="play-badge">▶</span>
+        <span class="video-info">
+          <span class="eyebrow-sm">Video · Loom</span>
+          <span class="video-title">Cómo agregar marca de agua y comprimir fotos</span>
+          <span class="video-sub">Clic para abrir y ver el tutorial completo</span>
+        </span>
+      </a>
 
       <h3 class="sub">Datos del programa</h3>
       <table class="info-table">
@@ -497,10 +539,14 @@
       <h2><span class="badge-num">6</span> Cómo hacer otros cambios en WordPress</h2>
       <p class="lead">Cambios generales de texto, imágenes o secciones que no son ni propiedades ni traducciones.</p>
 
-      <div class="video-wrap">
-        <iframe src="https://www.loom.com/embed/09f9636e985441da97999bf3c0abb4e6" allowfullscreen></iframe>
-      </div>
-      <p class="video-fallback">¿No carga el video? <a href="https://www.loom.com/share/09f9636e985441da97999bf3c0abb4e6" target="_blank" rel="noopener">Verlo directamente en Loom</a>.</p>
+      <a class="video-card" href="https://www.loom.com/share/09f9636e985441da97999bf3c0abb4e6" target="_blank" rel="noopener">
+        <span class="play-badge">▶</span>
+        <span class="video-info">
+          <span class="eyebrow-sm">Video · Loom</span>
+          <span class="video-title">Cómo editar páginas en Elementor</span>
+          <span class="video-sub">Clic para abrir y ver el tutorial completo</span>
+        </span>
+      </a>
 
       <h3 class="sub">Pasos generales (editor Elementor)</h3>
       <ol class="steps">
@@ -517,10 +563,14 @@
       <h2><span class="badge-num">7</span> Cómo editar la página "Versus Explica"</h2>
       <p class="lead">Actualizar el contenido de esta página sin afectar el resto del sitio.</p>
 
-      <div class="video-wrap">
-        <iframe src="https://www.loom.com/embed/1fca118554f640d89f603af21bf42053" allowfullscreen></iframe>
-      </div>
-      <p class="video-fallback">¿No carga el video? <a href="https://www.loom.com/share/1fca118554f640d89f603af21bf42053" target="_blank" rel="noopener">Verlo directamente en Loom</a>.</p>
+      <a class="video-card" href="https://www.loom.com/share/1fca118554f640d89f603af21bf42053" target="_blank" rel="noopener">
+        <span class="play-badge">▶</span>
+        <span class="video-info">
+          <span class="eyebrow-sm">Video · Loom</span>
+          <span class="video-title">Cómo actualizar la página Versus Explica</span>
+          <span class="video-sub">Clic para abrir y ver el tutorial completo</span>
+        </span>
+      </a>
 
       <h3 class="sub">Pasos generales</h3>
       <ol class="steps">
@@ -535,10 +585,14 @@
       <h2><span class="badge-num">8</span> Cómo corregir traducciones en la web</h2>
       <p class="lead">La web usa el plugin TranslatePress para gestionar español, catalán, francés e inglés.</p>
 
-      <div class="video-wrap">
-        <iframe src="https://www.loom.com/embed/0498a3ecb6d148b98efb894c2df80feb" allowfullscreen></iframe>
-      </div>
-      <p class="video-fallback">¿No carga el video? <a href="https://www.loom.com/share/0498a3ecb6d148b98efb894c2df80feb" target="_blank" rel="noopener">Verlo directamente en Loom</a>.</p>
+      <a class="video-card" href="https://www.loom.com/share/0498a3ecb6d148b98efb894c2df80feb" target="_blank" rel="noopener">
+        <span class="play-badge">▶</span>
+        <span class="video-info">
+          <span class="eyebrow-sm">Video · Loom</span>
+          <span class="video-title">Cómo corregir traducciones en WordPress</span>
+          <span class="video-sub">Clic para abrir y ver el tutorial completo</span>
+        </span>
+      </a>
 
       <h3 class="sub">Pasos generales</h3>
       <ol class="steps">
@@ -579,11 +633,7 @@
       <p style="font-size:14.5px;">Depende del panel del proveedor contratado. Las rutas más comunes:</p>
       <table class="info-table">
         <tr><th>hPanel (Hostinger)</th><td>Sitios web → Administrar → Rendimiento / Caché → <code>Purgar caché</code>.</td></tr>
-        <tr><th>SiteGround (Site Tools)</th><td>Velocidad → Caché → botón <code>Vaciar caché</code>.</td></tr>
-        <tr><th>cPanel con LiteSpeed</th><td>Sección <code>LiteSpeed Web Cache Manager</code> → <code>Vaciar todo el caché</code>.</td></tr>
-        <tr><th>Cloudways</th><td>Panel del servidor → pestaña <code>Varnish / Application Management</code> → <code>Purge Cache</code>.</td></tr>
       </table>
-      <div class="note">Si no se reconoce el panel exacto del hosting contratado, contactar al proveedor o al soporte técnico indicando: "necesito purgar el caché del sitio a nivel de servidor".</div>
 
       <h3 class="sub">Verificación final: caché del navegador</h3>
       <p style="font-size:14.5px;">Después de purgar los pasos anteriores, forzar una recarga completa del navegador:</p>
